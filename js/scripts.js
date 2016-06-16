@@ -1,4 +1,5 @@
 var turn = true;
+var imageFile;
 
 //// turn
 function Turn(context) {
@@ -11,7 +12,7 @@ Turn.prototype.roll = function() {
 
   console.log(die);
   this.tempScore += die.value;
-  alert(this.tempScore);
+  // alert(this.tempScore);
   return die;
 }
 
@@ -92,11 +93,13 @@ $(function(){
       $('#videocontainer video source').attr('src', videoFile);
       $("#videocontainer video")[0].load();
     });
+    imageFile = die.image;
+    $('#pastrolls').append('<img src="' + imageFile + '" alt="thrown die" class="thrown"/>');
   });
 
   $('#hold').click(function() {
     newTurn();
-    alert(currentTurn.player.name);
+    // alert(currentTurn.player.name);
     turnOver();
   });
 

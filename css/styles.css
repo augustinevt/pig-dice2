@@ -1,11 +1,11 @@
 div {
-  /*width: 300px;
-  height: 40vw;*/
-  border: solid;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
   max-width: 1000px;
+  font-family: "Patua One", cursive;
 }
 
 
@@ -28,16 +28,19 @@ header img {
 #videocontainer {
   background-color: #090909;
   width: 60%;
+  float: left;
 }
 
 #videocontainer video {
   max-width: 100%;
+  max-height: 750px;
 }
 
 
 
 #rightside {
-  width: 35%;
+  width: 40%;
+  float: left;
 }
 
 
@@ -50,8 +53,20 @@ header img {
 
 }
 
+.thrown {
+  width: 30.33%;
+  margin: 1px 1.5%;
+  border-radius: 7px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,.9)
+}
 
 /* footer */
+footer {
+  display: block;
+  width: 100;
+  clear: both;
+}
+
 #footerlogo {
   width: 80px;
   height: 80px;
