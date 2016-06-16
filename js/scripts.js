@@ -93,8 +93,7 @@ $(function(){
       $('#videocontainer video source').attr('src', videoFile);
       $("#videocontainer video")[0].load();
     });
-    imageFile = die.image;
-    $('#pastrolls').append('<img src="' + imageFile + '" alt="thrown die" class="thrown"/>');
+    $('#pastrolls').append('<img src="' + die.image + '" alt="thrown die showing ' + die.value + '" class="thrown"/>');
   });
 
   $('#hold').click(function() {
