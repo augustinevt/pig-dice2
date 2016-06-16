@@ -1,6 +1,26 @@
 var turn = true;
 var imageFile;
 var videoHasFinished = true;
+var sparkleArray = [];
+
+
+function Sparkle(x,y,id) {
+  this.x = x;
+  this.y = y;
+  this.id = id;
+}
+
+function makeManySparkles(density, width, height) {
+  for(i=0; i < density; i++) {
+    var y = Math.random() * width;
+    var x = Math.random() * height;
+    sparkleArray.push(new Sparkle(x,y,i));
+  }
+}
+
+
+
+
 
 //// turn
 function Turn(context) {
@@ -75,8 +95,6 @@ var dieValues = [
   {value: 6, video: "vid/roll6.mp4", image: "img/six.jpg"}
 ];
 
-//////
-
 $(function(){
   turnOver();
   newTurn();
@@ -115,18 +133,46 @@ $(function(){
       if (currentTurn.pigDie) {
         turnOver();
         newTurn();
+        $('#scoredisplay div h2').toggleClass('yourturn');
       } else if (currentTurn.win) {
         currentTurn.hold();
         $('#playerscore').text(playerOne.permScore);
         $('#computerscore').text(playerTwo.permScore);
         alert('you win!')
+        var width = $('.sparkle-container').width();
+      var height = $('.sparkle-container').height();
+        makeManySparkles(1000, width, height );
+        sparkleArray.forEach(function(sparkle) {
+          $('.sparkle-container').append("<div class='sparkle' id='sparkle"+sparkle.id+"'></div>");
+          $('#sparkle' + sparkle.id).css({'top': sparkle.x, 'left': sparkle.y});
+          $('#sparkle' + sparkle.id).fadeIn( (Math.random() * 5000) + 2000).fadeOut( Math.random() * 1500);
+        });
+        // makeManySparkles(1000, width, height );
+        // sparkleArray.forEach(function(sparkle) {
+        //   $('.sparkle-container').append("<div class='sparkle' id='sparkle"+sparkle.id+"'></div>");
+        //   $('#sparkle' + sparkle.id).css({'top': sparkle.x, 'left': sparkle.y});
+        //   $('#sparkle' + sparkle.id).fadeIn( Math.random() * 5000).fadeOut( Math.random() * 15000);
+        // });
+        // makeManySparkles(1000, width, height );
+        // sparkleArray.forEach(function(sparkle) {
+        //   $('.sparkle-container').append("<div class='sparkle' id='sparkle"+sparkle.id+"'></div>");
+        //   $('#sparkle' + sparkle.id).css({'top': sparkle.x, 'left': sparkle.y});
+        //   $('#sparkle' + sparkle.id).fadeIn( Math.random() * 5000).fadeOut( Math.random() * 15000);
+        // });
+        // makeManySparkles(1000, width, height );
+        // sparkleArray.forEach(function(sparkle) {
+        //   $('.sparkle-container').append("<div class='sparkle' id='sparkle"+sparkle.id+"'></div>");
+        //   $('#sparkle' + sparkle.id).css({'top': sparkle.x, 'left': sparkle.y});
+        //   $('#sparkle' + sparkle.id).fadeIn( Math.random() * 1000).fadeOut( Math.random() * 1000);
+        // });
+        sparkleArray = [];
       }
     }
   });
 
   $('#hold').click(function() {
-
     currentTurn.hold();
+    $('#scoredisplay div h2').toggleClass('yourturn');
     $('#playerscore').text(playerOne.permScore);
     $('#computerscore').text(playerTwo.permScore);
 

@@ -17,21 +17,31 @@ div {
 /* header */
 header img {
   max-width: 100%;
-  border-radius: 3px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 8px rgba(80, 30, 32, .8);
 }
 
 /* scores */
 #scoredisplay div {
   display: inline-block;
+  margin-left: 2%;
+  margin-right: 10%;
+}
+
+.yourturn {
+  color: red;
+  text-shadow: 2px 2px 3px #000;
 }
 
 /* middle areas */
-/*#middlestuff{
+#middlestuff{
   min-height: 500px;
-  border: solid;
   position: relative;
   height: 500px;
-}*/
+  overflow: hidden;
+}
+
+
 
 /* video */
 #videocontainer, #rightside {
@@ -41,15 +51,17 @@ header img {
 #videocontainer {
   background-color: #090909;
   width: 60%;
+  border-radius: 90px;
 }
 
 #videocontainer video {
-  /*position:relative;
-  top:-100px;*/
+  position:relative;
+  top:-100px;
   max-width: 100%;
   max-height: 750px;
   cursor: pointer;
   background-color: #090909;
+
 }
 
 
@@ -60,14 +72,23 @@ header img {
 }
 
 
+
 #roll, #hold {
   display: inline-block;
   width: 40%;
   cursor: pointer;
 }
 
-#gamecontrol {
+@media screen and (max-width: 620px) {
+  #roll, #hold {
+    display: block;
+    margin:auto;
+    }
 
+}
+
+#gamecontrol {
+  text-align: center;
 }
 
 .thrown {
@@ -86,8 +107,8 @@ footer {
 }
 
 #footerlogo {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 8px;
   box-shadow: 3px 3px 3px rgba(0,0,0,.4);
 }
@@ -98,4 +119,26 @@ footer div {
 
 footer div h1 {
   display: inline-block;
+}
+
+footer div:nth-child(2) {
+  margin-left: 20%;
+  font-size: 2em;
+}
+
+.sparkle {
+  position: absolute;;
+  left: 3vw;
+  top: 10vw;
+  width: 10px;
+  height: 10px;
+  background: gold;
+  display: none;
+}
+
+.sparkle-container {
+  margin: auto;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
 }
