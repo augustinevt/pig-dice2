@@ -18,3 +18,10 @@ If value rolled is one turn is over.
 When user clicks hold turn total is added to score and turn is over.
 
 When turn total is added to score, game is won.
+
+
+Backend
+
+  have hold switch the player X
+
+ 
