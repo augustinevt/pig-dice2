@@ -37,7 +37,7 @@ Turn.prototype.roll = function() {
   if (die.value === 1) {
     this.pigDie = true;
   }
-  if (this.player.permScore + this.tempScore > 100) {
+  if (this.player.permScore + this.tempScore > 50) {
     this.win = true;
   }
   return die;
