@@ -3,6 +3,10 @@ div {
   padding: 0;
 }
 
+.hiddendie {
+  display: none;
+}
+
 .container {
   max-width: 1000px;
   font-family: "Patua One", cursive;
@@ -13,6 +17,7 @@ div {
 /* header */
 header img {
   max-width: 100%;
+  border-radius: 3px;
 }
 
 /* scores */
@@ -20,6 +25,13 @@ header img {
   display: inline-block;
 }
 
+/* middle areas */
+/*#middlestuff{
+  min-height: 500px;
+  border: solid;
+  position: relative;
+  height: 500px;
+}*/
 
 /* video */
 #videocontainer, #rightside {
@@ -29,25 +41,29 @@ header img {
 #videocontainer {
   background-color: #090909;
   width: 60%;
-  float: left;
 }
 
 #videocontainer video {
+  /*position:relative;
+  top:-100px;*/
   max-width: 100%;
   max-height: 750px;
+  cursor: pointer;
+  background-color: #090909;
 }
 
 
 
 #rightside {
   width: 40%;
-  float: left;
+  float: right;
 }
 
 
 #roll, #hold {
   display: inline-block;
   width: 40%;
+  cursor: pointer;
 }
 
 #gamecontrol {
@@ -66,11 +82,14 @@ footer {
   display: block;
   width: 100;
   clear: both;
+  padding-top: 10px;
 }
 
 #footerlogo {
   width: 80px;
   height: 80px;
+  border-radius: 8px;
+  box-shadow: 3px 3px 3px rgba(0,0,0,.4);
 }
 
 footer div {

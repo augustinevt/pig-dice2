@@ -1,25 +1,37 @@
 var turn = true;
 var imageFile;
+var videoHasFinished = true;
 
 //// turn
 function Turn(context) {
   this.player = context;
-  this.tempScore = 33;
+  this.tempScore = 0;
+  this.pigDie = false;
+  this.win = false;
 }
 
 Turn.prototype.roll = function() {
   var die = dieValues[Math.floor( Math.random() * 6)];
-
   console.log(die);
   this.tempScore += die.value;
-  // alert(this.tempScore);
+  if (die.value === 1) {
+    this.pigDie = true;
+  }
+  if (this.player.permScore + this.tempScore > 100) {
+    this.win = true;
+  }
   return die;
+}
+
+Turn.prototype.hold = function() {
+  this.player.permScore +=  this.tempScore
 }
 
 
 ////player
 function Player(name) {
   this.name = name;
+  this.permScore = 0;
 }
 
 Player.prototype.turn = function() {
@@ -38,6 +50,7 @@ var currentPlayer;
 var currentTurn;
 
 function turnOver() {
+  $('#pastrolls').empty();
   if (turn) {
     turn = false;
    return currentPlayer = playerOne;
@@ -82,25 +95,48 @@ $(function(){
     });
   });
 
-  $('#roll').click(function() {
-
-    var die = currentTurn.roll();
-    var videoFile = die.video;
-    $('#videocontainer video source').attr('src', videoFile);
-    $("#videocontainer video")[0].load();
-    $('#vid').one('ended', function() {
-      var videoFile = 'vid/blank.mp4';
-      $('#videocontainer video source').attr('src', videoFile);
+  $('#roll, #vid').click(function() {
+    if (videoHasFinished) {
+      videoHasFinished = false;
+      var die = currentTurn.roll();
+      $('#videocontainer video source').attr('src', die.video);
       $("#videocontainer video")[0].load();
-    });
-    $('#pastrolls').append('<img src="' + die.image + '" alt="thrown die showing ' + die.value + '" class="thrown"/>');
+      $('#vid').one('ended', function() {
+        var videoFile = 'vid/blank.mp4';
+        $('#videocontainer video source').attr('src', videoFile);
+        $("#videocontainer video")[0].load();
+        videoHasFinished = true;
+      });
+      $('#pastrolls').append('<img src="' + die.image + '" alt="thrown die showing ' + die.value + '" class="thrown hiddendie"/>');
+      $(".hiddendie").delay(1500).fadeIn(4000);
+
+      ///
+
+      if (currentTurn.pigDie) {
+        turnOver();
+        newTurn();
+      } else if (currentTurn.win) {
+        currentTurn.hold();
+        $('#playerscore').text(playerOne.permScore);
+        $('#computerscore').text(playerTwo.permScore);
+        alert('you win!')
+      }
+    }
   });
 
   $('#hold').click(function() {
+
+    currentTurn.hold();
+    $('#playerscore').text(playerOne.permScore);
+    $('#computerscore').text(playerTwo.permScore);
+
+    turnOver();
     newTurn();
     // alert(currentTurn.player.name);
-    turnOver();
+
   });
+
+  // $('#videocontainer').css('height', $("video").height());
 
 });
 
